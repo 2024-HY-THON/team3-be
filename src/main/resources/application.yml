@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ${DEV_RDS_ENDPOINT}
+    username: ${DEV_RDS_USERNAME}
+    password: ${DEV_RDS_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
