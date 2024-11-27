@@ -35,4 +35,8 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Transmission> transmissionList = new ArrayList<>();
+
+    public void encodingPassword(String password) {
+        this.password = password;
+    }
 }
