@@ -12,43 +12,14 @@ public class DiaryConverter {
 
     public static Diary toDiary(DiaryRequestDTO.CreateDiaryDTO request) {
 
-        SubjectType subjectType = null;
-        switch (request.getSubjectType()){
-            case 1:
-                subjectType = SubjectType.WORK; break;
-            case 2:
-                subjectType = SubjectType.STUDY; break;
-            case 3:
-                subjectType = SubjectType.FAMILY; break;
-            case 4:
-                subjectType = SubjectType.FRIENDS; break;
-            case 5:
-                subjectType = SubjectType.HEALTH; break;
-            case 6:
-                subjectType = SubjectType.WEATHER; break;
-            case 7:
-                subjectType = SubjectType.LOVE; break;
-            case 8:
-                subjectType = SubjectType.MONEY; break;
-            case 9:
-                subjectType = SubjectType.OTHER; break;
-        }
-
-        EmotionType emotionType = null;
-        switch (request.getEmotionType()){
-            case 1:
-                emotionType = EmotionType.HARD; break;
-            case 2:
-                emotionType = EmotionType.GOOD; break;
-            case 3:
-                emotionType = EmotionType.SPECIAL; break;
-        }
+        SubjectType subject = SubjectType.fromValue(request.getSubjectType());
+        EmotionType emotion = EmotionType.fromValue(request.getEmotionType());
 
         return Diary.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .subjectType(subjectType)
-                .emotionType(emotionType)
+                .subjectType(subject)
+                .emotionType(emotion)
                 .build();
     }
 
