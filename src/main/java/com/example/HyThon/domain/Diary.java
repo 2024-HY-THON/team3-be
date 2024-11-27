@@ -8,7 +8,6 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,4 +45,9 @@ public class Diary extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SubjectType subjectType;
+
+    public void setMember(Member member) {
+        this.writer = member;
+    }
+
 }
