@@ -49,5 +49,17 @@ public class Diary extends BaseEntity {
     public void setMember(Member member) {
         this.writer = member;
     }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
+    public void setSubjectType(SubjectType subjectType) {
+        this.subjectType = subjectType;
+    }
+    public void setEmotionType(EmotionType emotionType) {
+        this.emotionType = emotionType;
+    }
 
 }

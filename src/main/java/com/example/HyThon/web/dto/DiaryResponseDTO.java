@@ -17,4 +17,13 @@ public class DiaryResponseDTO {
         Long diaryId;
         LocalDateTime createdAt;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class EditDiaryResultDTO {
+        Long diaryId;
+        LocalDateTime updatedAt;
+    }
 }

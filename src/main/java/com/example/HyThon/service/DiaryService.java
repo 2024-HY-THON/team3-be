@@ -29,4 +29,16 @@ public class DiaryService {
 
         return diaryRepository.save(newDiary);
     }
+
+    @Transactional
+    public Diary editDiary(DiaryRequestDTO.EditDiaryDTO request) {
+
+        Diary diary = diaryRepository.findById(request.getDiaryId())
+                .orElseThrow(() -> new IllegalArgumentException("일기가 존재하지 않습니다."));
+
+        DiaryConverter.toUpdateDiary(diary, request);
+
+        return diaryRepository.save(diary);
+    }
+
 }

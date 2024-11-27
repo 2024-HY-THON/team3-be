@@ -30,4 +30,28 @@ public class DiaryConverter {
                 .build();
     }
 
+    public static void toUpdateDiary(Diary diary, DiaryRequestDTO.EditDiaryDTO request) {
+        if (request.getTitle() != null) {
+            diary.setTitle(request.getTitle());
+        }
+        if (request.getContent() != null) {
+            diary.setContent(request.getContent());
+        }
+        if (request.getSubjectType() != null) {
+            SubjectType subject = SubjectType.fromValue(request.getSubjectType());
+            diary.setSubjectType(subject);
+        }
+        if (request.getEmotionType() != null) {
+            EmotionType emotion = EmotionType.fromValue(request.getEmotionType());
+            diary.setEmotionType(emotion);
+        }
+    }
+
+    public static DiaryResponseDTO.EditDiaryResultDTO toEditDiaryResult(Diary diary) {
+        return DiaryResponseDTO.EditDiaryResultDTO.builder()
+                .diaryId(diary.getId())
+                .updatedAt(LocalDateTime.now())
+                .build();
+    }
+
 }

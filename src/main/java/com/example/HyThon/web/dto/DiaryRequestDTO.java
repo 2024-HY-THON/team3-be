@@ -26,4 +26,22 @@ public class DiaryRequestDTO {
         Integer emotionType;
 
     }
+
+    @Getter
+    public static class EditDiaryDTO {
+
+        @NotNull
+        Long diaryId;
+
+        @Length(max = 20)
+        String title;
+
+        String content;
+
+        Integer subjectType;
+
+        Integer emotionType;
+
+    }
+
 }

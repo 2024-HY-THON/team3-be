@@ -9,10 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,4 +24,12 @@ public class DiaryController {
         Diary diary = diaryService.createDiary(request);
         return ResponseEntity.ok(DiaryConverter.toCreateDiaryResult(diary));
     }
+
+    @PatchMapping()
+    @Operation(summary = "일기 수정 API")
+    public ResponseEntity<DiaryResponseDTO.EditDiaryResultDTO> EditDiary(@Valid @RequestBody DiaryRequestDTO.EditDiaryDTO request) {
+        Diary diary = diaryService.editDiary(request);
+        return ResponseEntity.ok(DiaryConverter.toEditDiaryResult(diary));
+    }
+
 }
