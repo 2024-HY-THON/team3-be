@@ -1,4 +1,4 @@
 package com.example.HyThon.converter;
 
-public class TempConverter {
+public class TransmissionConverter {
 }
