@@ -10,11 +10,11 @@ public class MemberRequestDTO {
     public static class MemberSignupDTO {
 
         @NotNull(message = "유저 이름은 필수 입력 값입니다.")
-        @Length(max = 30)
-        private String username;
+        @Length(min = 1, max = 30)
+        private String name;
 
         @NotNull(message = "비밀번호는 필수 입력 값입니다.")
-        @Length(max = 100)
+        @Length(min = 1, max = 100)
         private String password;
     }
 }

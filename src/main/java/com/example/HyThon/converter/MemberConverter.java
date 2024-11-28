@@ -12,7 +12,7 @@ public class MemberConverter {
 
     public static Member toMember(MemberRequestDTO.MemberSignupDTO request) {
         return Member.builder()
-                .userName(request.getUsername())
+                .name(request.getName())
                 .password(request.getPassword())
                 .build();
     }
