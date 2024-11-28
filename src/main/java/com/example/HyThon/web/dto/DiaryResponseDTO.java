@@ -26,4 +26,21 @@ public class DiaryResponseDTO {
         Long diaryId;
         LocalDateTime updatedAt;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class GetDiaryResultDTO {
+        Long diaryId;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CheckTodayResultDTO {
+        boolean isWritten;
+    }
+
 }
