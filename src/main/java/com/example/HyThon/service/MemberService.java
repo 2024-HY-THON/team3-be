@@ -25,8 +25,8 @@ public class MemberService {
     @Transactional
     public Member signupMember(MemberRequestDTO.MemberSignupDTO request) throws IllegalArgumentException {
 
-        Optional<Member> findMember = memberRepository.findByUserName(request.getUsername());
-        if (findMember.isPresent()) {
+        Member findMember = memberRepository.findByName(request.getName());
+        if (findMember != null) {
             throw new IllegalArgumentException("이미 존재하는 유저 이름입니다.");
         }
 
@@ -38,18 +38,16 @@ public class MemberService {
 
     public MemberResponseDTO.MemberLoginResultDTO login(MemberRequestDTO.MemberSignupDTO request) {
 
-        Optional<Member> findMember = memberRepository.findByUserName(request.getUsername());
-        if (findMember.isEmpty()) {
+        Member loginMember = memberRepository.findByName(request.getName());
+        if (loginMember == null) {
             throw new IllegalArgumentException("존재하지 않는 유저입니다.");
         }
 
-        Member member = findMember.get();
-
-        if (!passwordEncoder.matches(request.getPassword(), findMember.get().getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), loginMember.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 틀렸습니다.");
         }
 
-        String accessToken = jwtUtil.createAccessToken(member.getId(), member.getUserName(), null);
+        String accessToken = jwtUtil.createAccessToken(loginMember.getId(), loginMember.getUsername());
 
         return MemberResponseDTO.MemberLoginResultDTO.builder()
                 .grantType("Bearer")
