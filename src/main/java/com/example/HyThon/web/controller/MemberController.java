@@ -25,4 +25,12 @@ public class MemberController {
         Member member = memberService.signupMember(request);
         return ResponseEntity.ok(MemberConverter.toSignupResultDTO(member));
     }
+
+    @PostMapping("/login")
+    @Operation(summary = "로그인 API")
+    public ResponseEntity<MemberResponseDTO.MemberLoginResultDTO> login(@Valid @RequestBody MemberRequestDTO.MemberSignupDTO request)
+    throws IllegalArgumentException {
+        MemberResponseDTO.MemberLoginResultDTO accessToken = memberService.login(request);
+        return ResponseEntity.ok(accessToken);
+    }
 }

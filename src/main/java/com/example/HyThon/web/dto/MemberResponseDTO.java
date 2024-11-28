@@ -17,4 +17,13 @@ public class MemberResponseDTO {
         Long memberId;
         LocalDateTime createdAt;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberLoginResultDTO {
+        String grantType;
+        String accessToken;
+    }
 }
