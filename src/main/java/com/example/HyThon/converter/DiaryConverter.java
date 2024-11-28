@@ -54,4 +54,10 @@ public class DiaryConverter {
                 .build();
     }
 
+    public static DiaryResponseDTO.GetDiaryResultDTO toGetDiaryResult(Diary diary) {
+        return DiaryResponseDTO.GetDiaryResultDTO.builder()
+                .diaryId(diary.getId())
+                .build();
+    }
+
 }

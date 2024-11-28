@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -42,6 +44,15 @@ public class DiaryService {
         DiaryConverter.toUpdateDiary(diary, request);
 
         return diaryRepository.save(diary);
+    }
+
+    @Transactional
+    public Diary getDiary(Member member, LocalDate date) {
+
+        Diary diary = diaryRepository.findByMemberAndDate(member, date)
+                .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
+
+        return diary;
     }
 
 }
