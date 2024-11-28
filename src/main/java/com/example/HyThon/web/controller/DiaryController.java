@@ -46,4 +46,11 @@ public class DiaryController {
         return ApiResponse.onSuccess(DiaryConverter.toGetDiaryResult(diary));
     }
 
+    @GetMapping("/today")
+    @Operation(summary = "오늘 일기 작성 여부 확인 API")
+    public ApiResponse<DiaryResponseDTO.CheckTodayResultDTO> checkTodayDiary(@AuthenticationPrincipal Member member) {
+        Boolean isWritten = diaryService.checkTodayDiary(member);
+        return ApiResponse.onSuccess(DiaryConverter.toCheckTodayDiaryResult(isWritten));
+    }
+
 }
