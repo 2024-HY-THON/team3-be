@@ -1,5 +1,7 @@
 package com.example.HyThon.service;
 
+import com.example.HyThon.apiPayload.code.status.ErrorStatus;
+import com.example.HyThon.apiPayload.exception.handler.MemberHandler;
 import com.example.HyThon.converter.MemberConverter;
 import com.example.HyThon.domain.Member;
 import com.example.HyThon.repository.MemberRepository;
@@ -27,7 +29,7 @@ public class MemberService {
 
         Member findMember = memberRepository.findByName(request.getName());
         if (findMember != null) {
-            throw new IllegalArgumentException("이미 존재하는 유저 이름입니다.");
+            throw new MemberHandler(ErrorStatus.NICKNAME_ALREADY_EXIST);
         }
 
         Member signupMember = MemberConverter.toMember(request);
@@ -40,11 +42,11 @@ public class MemberService {
 
         Member loginMember = memberRepository.findByName(request.getName());
         if (loginMember == null) {
-            throw new IllegalArgumentException("존재하지 않는 유저입니다.");
+            throw new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND);
         }
 
         if (!passwordEncoder.matches(request.getPassword(), loginMember.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 틀렸습니다.");
+            throw new MemberHandler(ErrorStatus.PASSWORD_NOT_MATCH);
         }
 
         String accessToken = jwtUtil.createAccessToken(loginMember.getId(), loginMember.getUsername());

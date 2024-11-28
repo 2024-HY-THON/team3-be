@@ -1,5 +1,6 @@
 package com.example.HyThon.web.controller;
 
+import com.example.HyThon.apiPayload.ApiResponse;
 import com.example.HyThon.converter.MemberConverter;
 import com.example.HyThon.domain.Member;
 import com.example.HyThon.service.MemberService;
@@ -20,17 +21,15 @@ public class MemberController {
 
     @PostMapping("/signup")
     @Operation(summary = "회원가입 API")
-    public ResponseEntity<MemberResponseDTO.MemberSignupResultDTO> signup(@Valid @RequestBody MemberRequestDTO.MemberSignupDTO request)
-    throws IllegalArgumentException {
+    public ApiResponse<MemberResponseDTO.MemberSignupResultDTO> signup(@Valid @RequestBody MemberRequestDTO.MemberSignupDTO request) {
         Member member = memberService.signupMember(request);
-        return ResponseEntity.ok(MemberConverter.toSignupResultDTO(member));
+        return ApiResponse.onSuccess(MemberConverter.toSignupResultDTO(member));
     }
 
     @PostMapping("/login")
     @Operation(summary = "로그인 API")
-    public ResponseEntity<MemberResponseDTO.MemberLoginResultDTO> login(@Valid @RequestBody MemberRequestDTO.MemberSignupDTO request)
-    throws IllegalArgumentException {
-        MemberResponseDTO.MemberLoginResultDTO accessToken = memberService.login(request);
-        return ResponseEntity.ok(accessToken);
+    public ApiResponse<MemberResponseDTO.MemberLoginResultDTO> login(@Valid @RequestBody MemberRequestDTO.MemberSignupDTO request) {
+    MemberResponseDTO.MemberLoginResultDTO accessToken = memberService.login(request);
+        return ApiResponse.onSuccess(accessToken);
     }
 }
