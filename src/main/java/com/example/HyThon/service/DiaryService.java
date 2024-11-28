@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -53,6 +54,14 @@ public class DiaryService {
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
 
         return diary;
+    }
+
+    public Boolean checkTodayDiary(Member member) {
+
+        LocalDate date = LocalDate.now();
+        Optional<Diary> diary = diaryRepository.findByMemberAndDate(member, date);
+
+        return diary.isPresent();
     }
 
 }

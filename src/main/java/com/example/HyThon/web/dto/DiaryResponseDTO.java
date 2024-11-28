@@ -35,4 +35,12 @@ public class DiaryResponseDTO {
         Long diaryId;
     }
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CheckTodayResultDTO {
+        boolean isWritten;
+    }
+
 }
