@@ -1,5 +1,8 @@
 package com.example.HyThon.service;
 
+import com.example.HyThon.apiPayload.code.status.ErrorStatus;
+import com.example.HyThon.apiPayload.exception.handler.DiaryHandler;
+import com.example.HyThon.apiPayload.exception.handler.MemberHandler;
 import com.example.HyThon.converter.DiaryConverter;
 import com.example.HyThon.domain.Diary;
 import com.example.HyThon.domain.Member;
@@ -22,7 +25,7 @@ public class DiaryService {
     public Diary createDiary(Long memberId, DiaryRequestDTO.CreateDiaryDTO request) {
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
         Diary newDiary = DiaryConverter.toDiary(request);
         newDiary.setMember(member);
@@ -34,7 +37,7 @@ public class DiaryService {
     public Diary editDiary(DiaryRequestDTO.EditDiaryDTO request) {
 
         Diary diary = diaryRepository.findById(request.getDiaryId())
-                .orElseThrow(() -> new IllegalArgumentException("일기가 존재하지 않습니다."));
+                .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
 
         DiaryConverter.toUpdateDiary(diary, request);
 

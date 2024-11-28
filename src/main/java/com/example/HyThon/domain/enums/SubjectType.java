@@ -1,5 +1,8 @@
 package com.example.HyThon.domain.enums;
 
+import com.example.HyThon.apiPayload.code.status.ErrorStatus;
+import com.example.HyThon.apiPayload.exception.handler.DiaryHandler;
+
 public enum SubjectType {
     WORK(1), STUDY(2), FAMILY(3),
     FRIENDS(4), HEALTH(5), WEATHER(6),
@@ -17,6 +20,6 @@ public enum SubjectType {
                 return subject;
             }
         }
-        throw new IllegalArgumentException("소재 카테고리가 존재하지 않습니다.");
+        throw new DiaryHandler(ErrorStatus.SUBJECT_NOT_FOUND);
     }
 }

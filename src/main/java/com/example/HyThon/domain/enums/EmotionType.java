@@ -1,5 +1,8 @@
 package com.example.HyThon.domain.enums;
 
+import com.example.HyThon.apiPayload.code.status.ErrorStatus;
+import com.example.HyThon.apiPayload.exception.handler.DiaryHandler;
+
 public enum EmotionType {
     HARD(1), GOOD(2), SPECIAL(3);
 
@@ -15,7 +18,7 @@ public enum EmotionType {
                 return emotion;
             }
         }
-        throw new IllegalArgumentException("감정 카테고리가 존재하지 않습니다.");
+        throw new DiaryHandler(ErrorStatus.EMOTION_NOT_FOUND);
     }
 
 }
