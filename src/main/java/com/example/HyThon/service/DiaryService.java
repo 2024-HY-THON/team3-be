@@ -19,9 +19,9 @@ public class DiaryService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Diary createDiary(DiaryRequestDTO.CreateDiaryDTO request) {
+    public Diary createDiary(Long memberId, DiaryRequestDTO.CreateDiaryDTO request) {
 
-        Member member = memberRepository.findById(request.getMemberId())
+        Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
 
         Diary newDiary = DiaryConverter.toDiary(request);

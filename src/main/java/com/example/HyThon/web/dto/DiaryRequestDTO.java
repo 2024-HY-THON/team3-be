@@ -9,9 +9,6 @@ public class DiaryRequestDTO {
     @Getter
     public static class CreateDiaryDTO {
 
-        @NotNull
-        Long memberId;
-
         @NotNull(message = "제목을 입력해 주세요.")
         @Length(max = 20)
         String title;
