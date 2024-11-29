@@ -19,4 +19,14 @@ public class TransmissionResponseDTO {
         LocalDateTime createdAt;
         Long receiverId;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class GetTransmissionResultDTO {
+        Long transmissionId;
+        Long diaryId;
+    }
+
 }

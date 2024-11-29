@@ -25,4 +25,12 @@ public class TransmissionConverter {
                 .receiverId(transmission.getReceiver().getId())
                 .build();
     }
+
+    public static TransmissionResponseDTO.GetTransmissionResultDTO toGetTransmissionResultDTO(Transmission transmission) {
+        return TransmissionResponseDTO.GetTransmissionResultDTO.builder()
+                .transmissionId(transmission.getId())
+                .diaryId(transmission.getDiary().getId())
+                .build();
+    }
+
 }
