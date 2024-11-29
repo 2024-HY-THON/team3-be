@@ -14,7 +14,7 @@ public class TransmissionConverter {
     public static Transmission toTransmission(Diary diary, Member member) {
         return Transmission.builder()
                 .diary(diary)
-                .receiver(member)
+                .sender(member)
                 .build();
     }
 
@@ -22,7 +22,8 @@ public class TransmissionConverter {
         return TransmissionResponseDTO.TransmissionResultDTO.builder()
                 .transmissionId(transmission.getId())
                 .createdAt(LocalDateTime.now())
-                .receiverId(transmission.getReceiver().getId())
+                .diaryId(transmission.getDiary().getId())
+                .senderId(transmission.getSender().getId())
                 .build();
     }
 
