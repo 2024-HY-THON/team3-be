@@ -30,27 +30,27 @@ public class TransmissionService {
 
     public Transmission transmitDiary(TransmissionRequestDTO.TransmitDTO request) {
 
-        // 보내는 일기 찾기
+        // 내 일기 찾기
         Diary findDiary = diaryRepository.findById(request.getDiaryId())
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
         SubjectType subjectType = findDiary.getSubjectType();
         EmotionType emotionType = findDiary.getEmotionType();
         LocalDate writingDate = findDiary.getCreationDate();
 
-        // 보내는 일기와 소재, 감정이 동일한 일기 리스트 만들기
+        // 내 일기와 소재, 감정이 동일한 일기 리스트 만들기
         List<Diary> diaryList = diaryRepository.findDiariesBySubjectTypeAndEmotionTypeAndCreationDate(subjectType, emotionType, writingDate);
         if (diaryList.isEmpty()) {
             throw new TransmissionHandler(ErrorStatus.TRANSMISSION_NOT_FOUND);
         }
 
-        // 일기 리스트에서 랜덤으로 하나 뽑기 (보내는 일기와는 다른 일기)
+        // 일기 리스트에서 랜덤으로 하나 뽑기 (내 일기와는 다른 일기)
         Diary randomDiary = randomDiary(diaryList, findDiary);
 
-        // 랜덤으로 뽑은 일기를 쓴 사람(==발신자) 찾기
+        // 랜덤으로 뽑은 일기를 쓴 사람(==수신자) 찾기
         Member receiver = randomDiary.getWriter();
 
-        // 보내는 일기와 발신자 저장하기
-        Transmission transmission = TransmissionConverter.toTransmission(findDiary, receiver);
+        // 수신자의 일기와 수신자 저장하기
+        Transmission transmission = TransmissionConverter.toTransmission(randomDiary, receiver);
         return transmissionRepository.save(transmission);
     }
 
