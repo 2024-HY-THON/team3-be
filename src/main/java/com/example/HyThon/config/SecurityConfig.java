@@ -87,10 +87,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers("/api/diary/**").authenticated()
                         .requestMatchers("/api/transmission/**").authenticated()
-//                        .requestMatchers("/api/member/**").permitAll()
-//                        .requestMatchers("/health").permitAll()
-//                        .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .anyRequest().permitAll())
+                        .requestMatchers("/api/member/**").permitAll()
+                        .requestMatchers("/health").permitAll()
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionHandlerFilter, JwtAuthenticationFilter.class);
         return http.build();
