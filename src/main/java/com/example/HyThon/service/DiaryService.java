@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -42,6 +43,8 @@ public class DiaryService {
 
         Diary diary = diaryRepository.findById(request.getDiaryId())
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
+        if (!Objects.equals(diary.getCreationDate(), LocalDate.now()))
+            throw new DiaryHandler(ErrorStatus.NOT_TODAY_DIARY);
 
         DiaryConverter.toUpdateDiary(diary, request);
 
