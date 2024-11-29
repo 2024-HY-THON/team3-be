@@ -32,6 +32,7 @@ public class DiaryService {
 
         Diary newDiary = DiaryConverter.toDiary(request);
         newDiary.setMember(member);
+        newDiary.setCreationDate(LocalDate.now());
 
         return diaryRepository.save(newDiary);
     }

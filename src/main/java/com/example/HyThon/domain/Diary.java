@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,9 @@ public class Diary extends BaseEntity {
     @Column(nullable = false)
     private SubjectType subjectType;
 
+    @Column(nullable = false)
+    private LocalDate creationDate;
+
     public void setMember(Member member) {
         this.writer = member;
     }
@@ -61,5 +65,6 @@ public class Diary extends BaseEntity {
     public void setEmotionType(EmotionType emotionType) {
         this.emotionType = emotionType;
     }
+    public void setCreationDate(LocalDate creationDate) {this.creationDate =  creationDate;}
 
 }
