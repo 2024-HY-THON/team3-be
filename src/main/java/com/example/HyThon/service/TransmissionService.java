@@ -46,11 +46,8 @@ public class TransmissionService {
         // 일기 리스트에서 랜덤으로 하나 뽑기 (내 일기와는 다른 일기)
         Diary randomDiary = randomDiary(diaryList, findDiary);
 
-        // 랜덤으로 뽑은 일기를 쓴 사람(==수신자) 찾기
-        Member receiver = randomDiary.getWriter();
-
-        // 수신자의 일기와 수신자 저장하기
-        Transmission transmission = TransmissionConverter.toTransmission(randomDiary, receiver);
+        // 수신자의 일기와 내 번호 저장하기
+        Transmission transmission = TransmissionConverter.toTransmission(randomDiary, findDiary.getWriter());
         return transmissionRepository.save(transmission);
     }
 
