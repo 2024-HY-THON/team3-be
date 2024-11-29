@@ -2,6 +2,7 @@ package com.example.HyThon.service;
 
 import com.example.HyThon.apiPayload.code.status.ErrorStatus;
 import com.example.HyThon.apiPayload.exception.handler.DiaryHandler;
+import com.example.HyThon.apiPayload.exception.handler.TransmissionHandler;
 import com.example.HyThon.converter.TransmissionConverter;
 import com.example.HyThon.domain.Diary;
 import com.example.HyThon.domain.Member;
@@ -40,6 +41,9 @@ public class TransmissionService {
 
         // 보내는 일기와 소재, 감정이 동일한 일기 리스트 만들기
         List<Diary> diaryList = diaryRepository.findDiariesBySubjectTypeAndEmotionTypeAndCreationDate(subjectType, emotionType, writingDate);
+        if (diaryList.isEmpty()) {
+            throw new TransmissionHandler(ErrorStatus.TRANSMISSION_NOT_FOUND);
+        }
 
         // 일기 리스트에서 랜덤으로 하나 뽑기 (보내는 일기와는 다른 일기)
         Diary randomDiary = randomDiary(diaryList, findDiary);
