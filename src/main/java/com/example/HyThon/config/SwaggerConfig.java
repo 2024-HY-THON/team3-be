@@ -14,10 +14,9 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI HythonOpenAPI() {
-        // API 정보 설정
-        Info apiInfo = new Info()
-                .title("HY-THON team3")
-                .description("HY-THON team3 API 명세서")
+        Info info = new Info()
+                .title("HyThon team3 API")
+                .description("HyThon team3 API 명세서")
                 .version("1.0.0");
 
         String jwtSchemeName = "Authorization";
@@ -29,11 +28,10 @@ public class SwaggerConfig {
                         .scheme("bearer")
                         .bearerFormat("JWT"));
 
-        // OpenAPI 객체 생성 및 구성
         return new OpenAPI()
-                .info(apiInfo)
                 .addServersItem(new Server().url("/"))
-                .components(components)
-                .addSecurityItem(securityRequirement);
+                .info(info)
+                .addSecurityItem(securityRequirement)
+                .components(components);
     }
 }

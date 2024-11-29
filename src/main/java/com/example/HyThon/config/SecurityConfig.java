@@ -42,6 +42,21 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder(20);
     }
 
+    private static final String[] AUTH_WHITELIST = {
+            "/v2/api-docs",
+            "/v3/api-docs/**",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/file/**",
+            "/image/**",
+            "/swagger/**",
+            "/swagger-ui/**",
+            "/h2/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -59,23 +74,23 @@ public class SecurityConfig {
                         return configuration;
                     }
                 }))
-
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
-
-                .sessionManagement((sessionManage) -> sessionManage
+                .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                .exceptionHandling((exceptionHandler) -> exceptionHandler
+                .exceptionHandling((exception) -> exception
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                         .accessDeniedHandler(jwtAccessDeniedHandler))
 
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/member/**").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .anyRequest().authenticated())
-
+                .authorizeHttpRequests((request) -> request
+                        .requestMatchers("/api/diary/**").authenticated()
+                        .requestMatchers("/api/transmission/**").authenticated()
+//                        .requestMatchers("/api/member/**").permitAll()
+//                        .requestMatchers("/health").permitAll()
+//                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .anyRequest().permitAll())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionHandlerFilter, JwtAuthenticationFilter.class);
         return http.build();

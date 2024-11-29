@@ -17,6 +17,6 @@ public class TransmissionResponseDTO {
     public static class TransmissionResultDTO {
         Long transmissionId;
         LocalDateTime createdAt;
-        Member receiverId;
+        Long receiverId;
     }
 }

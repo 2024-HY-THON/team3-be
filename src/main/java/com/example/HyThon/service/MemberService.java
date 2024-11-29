@@ -25,7 +25,7 @@ public class MemberService {
     private final JwtUtil jwtUtil;
 
     @Transactional
-    public Member signupMember(MemberRequestDTO.MemberSignupDTO request) throws IllegalArgumentException {
+    public Member signupMember(MemberRequestDTO.MemberSignupDTO request) {
 
         Member findMember = memberRepository.findByName(request.getName());
         if (findMember != null) {
@@ -49,7 +49,7 @@ public class MemberService {
             throw new MemberHandler(ErrorStatus.PASSWORD_NOT_MATCH);
         }
 
-        String accessToken = jwtUtil.createAccessToken(loginMember.getId(), loginMember.getUsername());
+        String accessToken = jwtUtil.createAccessToken(loginMember.getId(), loginMember.getName(), null);
 
         return MemberResponseDTO.MemberLoginResultDTO.builder()
                 .grantType("Bearer")

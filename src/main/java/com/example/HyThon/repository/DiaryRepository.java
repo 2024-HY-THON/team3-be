@@ -17,5 +17,5 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
     @Query("SELECT d FROM Diary d WHERE d.writer = :member AND DATE(d.createdAt) = :date")
     Optional<Diary> findByMemberAndDate(Member member, @Param("date") LocalDate date);
 
-    List<Diary> findDiariesBySubjectTypeAndEmotionType(SubjectType subjectType, EmotionType emotionType);
+    List<Diary> findDiariesBySubjectTypeAndEmotionTypeAndCreationDate(SubjectType subjectType, EmotionType emotionType, LocalDate localDate);
 }
