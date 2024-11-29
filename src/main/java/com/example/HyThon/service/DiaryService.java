@@ -43,7 +43,7 @@ public class DiaryService {
 
         Diary diary = diaryRepository.findById(request.getDiaryId())
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
-        if (!Objects.equals(diary.getCreatedAt().toLocalDate(), LocalDate.now()))
+        if (!Objects.equals(diary.getCreationDate(), LocalDate.now()))
             throw new DiaryHandler(ErrorStatus.NOT_TODAY_DIARY);
 
         DiaryConverter.toUpdateDiary(diary, request);
