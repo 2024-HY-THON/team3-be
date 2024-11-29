@@ -17,8 +17,6 @@ public class TransmissionResponseDTO {
     public static class TransmissionResultDTO {
         Long transmissionId;
         LocalDateTime createdAt;
-        Long diaryId;
-        Long senderId;
     }
 
     @Builder
