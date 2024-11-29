@@ -10,7 +10,6 @@ import com.example.HyThon.domain.Transmission;
 import com.example.HyThon.domain.enums.EmotionType;
 import com.example.HyThon.domain.enums.SubjectType;
 import com.example.HyThon.repository.DiaryRepository;
-import com.example.HyThon.repository.MemberRepository;
 import com.example.HyThon.repository.TransmissionRepository;
 import com.example.HyThon.web.dto.TransmissionRequestDTO;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,6 @@ import java.util.Random;
 public class TransmissionService {
 
     private final TransmissionRepository transmissionRepository;
-    private final MemberRepository memberRepository;
     private final DiaryRepository diaryRepository;
 
     public Transmission transmitDiary(TransmissionRequestDTO.TransmitDTO request) {
@@ -66,4 +64,13 @@ public class TransmissionService {
             }
         }
     }
+
+    public Transmission getTransmission(Member member, LocalDate date) {
+
+        Transmission transmission = transmissionRepository.findByMemberAndDate(member, date)
+                .orElseThrow(() -> new TransmissionHandler(ErrorStatus.RECEIVED_NOT_FOUND));
+
+        return transmission;
+    }
+
 }

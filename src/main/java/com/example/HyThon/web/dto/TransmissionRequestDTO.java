@@ -3,7 +3,6 @@ package com.example.HyThon.web.dto;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 
 public class TransmissionRequestDTO {
 

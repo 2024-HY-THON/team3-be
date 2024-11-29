@@ -31,6 +31,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // 편지 관련 에러
     TRANSMISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "TRANSMISSION4001", "전송할 편지가 존재하지 않습니다."),
+    RECEIVED_NOT_FOUND(HttpStatus.NOT_FOUND, "TRANSMISSION4002", "받은 편지가 존재하지 않습니다."),
 
     // 토큰 관련 에러
     TOKEN_EMPTY(HttpStatus.UNAUTHORIZED, "MEMBER4020", "토큰이 비어있습니다."),
