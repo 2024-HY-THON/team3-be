@@ -39,7 +39,7 @@ public class SecurityConfig {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(20);
+        return new BCryptPasswordEncoder();
     }
 
     private static final String[] AUTH_WHITELIST = {
