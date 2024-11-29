@@ -29,6 +29,7 @@ public enum ErrorStatus implements BaseErrorCode {
     EMOTION_NOT_FOUND(HttpStatus.NOT_FOUND, "DIARY4003", "감정 카테고리가 존재하지 않습니다."),
     NOT_TODAY_DIARY(HttpStatus.BAD_REQUEST, "DIARY4004", "오늘 작성한 일기가 아닙니다."),
     DIARY_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "DIARY4005", "이미 오늘 일기를 작성했습니다."),
+    MEMBER_NOT_MATCH(HttpStatus.BAD_REQUEST, "DIARY4006", "해당 유저의 일기가 아닙니다."),
 
     // 편지 관련 에러
     TRANSMISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "TRANSMISSION4001", "전송할 편지가 존재하지 않습니다."),

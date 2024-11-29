@@ -42,10 +42,12 @@ public class DiaryService {
     }
 
     @Transactional
-    public Diary editDiary(DiaryRequestDTO.EditDiaryDTO request) {
+    public Diary editDiary(Long memberId, DiaryRequestDTO.EditDiaryDTO request) {
 
         Diary diary = diaryRepository.findById(request.getDiaryId())
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
+        if (!Objects.equals(diary.getWriter().getId(), memberId))
+            throw new DiaryHandler(ErrorStatus.MEMBER_NOT_MATCH);
         if (!Objects.equals(diary.getCreationDate(), LocalDate.now()))
             throw new DiaryHandler(ErrorStatus.NOT_TODAY_DIARY);
 
