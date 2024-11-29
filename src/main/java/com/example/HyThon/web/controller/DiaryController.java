@@ -33,8 +33,9 @@ public class DiaryController {
 
     @PatchMapping()
     @Operation(summary = "일기 수정 API")
-    public ApiResponse<DiaryResponseDTO.EditDiaryResultDTO> editDiary(@Valid @RequestBody DiaryRequestDTO.EditDiaryDTO request) {
-        Diary diary = diaryService.editDiary(request);
+    public ApiResponse<DiaryResponseDTO.EditDiaryResultDTO> editDiary(@AuthenticationPrincipal Member member,
+                                                                      @Valid @RequestBody DiaryRequestDTO.EditDiaryDTO request) {
+        Diary diary = diaryService.editDiary(member.getId(), request);
         return ApiResponse.onSuccess(DiaryConverter.toEditDiaryResult(diary));
     }
 
