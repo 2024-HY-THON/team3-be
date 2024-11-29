@@ -31,9 +31,12 @@ public class DiaryService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
+        Optional<Diary> findDiary = diaryRepository.findByMemberAndDate(member, LocalDate.now());
+        if (findDiary.isPresent())
+            throw new DiaryHandler(ErrorStatus.DIARY_ALREADY_EXIST);
+
         Diary newDiary = DiaryConverter.toDiary(request);
         newDiary.setMember(member);
-        newDiary.setCreationDate(LocalDate.now());
 
         return diaryRepository.save(newDiary);
     }

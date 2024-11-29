@@ -6,6 +6,7 @@ import com.example.HyThon.domain.enums.SubjectType;
 import com.example.HyThon.web.dto.DiaryRequestDTO;
 import com.example.HyThon.web.dto.DiaryResponseDTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DiaryConverter {
@@ -20,6 +21,7 @@ public class DiaryConverter {
                 .content(request.getContent())
                 .subjectType(subject)
                 .emotionType(emotion)
+                .creationDate(LocalDate.now())
                 .build();
     }
 
