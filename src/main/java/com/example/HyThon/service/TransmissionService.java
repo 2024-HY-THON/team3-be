@@ -31,7 +31,7 @@ public class TransmissionService {
 
     public Transmission transmitDiary(Member member, TransmissionRequestDTO.TransmitDTO request) {
 
-        // 보내는 일기 찾기
+        // 내 일기 찾기
         Diary findDiary = diaryRepository.findById(request.getDiaryId())
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
         if (!Objects.equals(findDiary.getWriter().getId(), member.getId()))
@@ -46,7 +46,7 @@ public class TransmissionService {
             throw new TransmissionHandler(ErrorStatus.TRANSMISSION_NOT_FOUND);
         }
 
-        // 일기 리스트에서 랜덤으로 하나 뽑기 (보내는 일기와는 다른 일기)
+        // 일기 리스트에서 랜덤으로 하나 뽑기 (내 일기와는 다른 일기)
         Diary randomDiary = randomDiary(diaryList, findDiary);
 
         // 받은 일기와 내 정보 저장하기
