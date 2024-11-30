@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TransmissionResponseDTO {
@@ -25,7 +26,9 @@ public class TransmissionResponseDTO {
     @AllArgsConstructor
     public static class GetTransmissionResultDTO {
         Long transmissionId;
-        Long diaryId;
+        String diaryTitle;
+        String diaryContent;
+        String sentAt;
     }
 
 }

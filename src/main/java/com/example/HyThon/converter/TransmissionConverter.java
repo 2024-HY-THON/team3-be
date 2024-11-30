@@ -6,7 +6,11 @@ import com.example.HyThon.domain.Transmission;
 import com.example.HyThon.web.dto.TransmissionResponseDTO;
 import lombok.RequiredArgsConstructor;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @RequiredArgsConstructor
 public class TransmissionConverter {
@@ -26,9 +30,12 @@ public class TransmissionConverter {
     }
 
     public static TransmissionResponseDTO.GetTransmissionResultDTO toGetTransmissionResultDTO(Transmission transmission) {
+        String parsedLocalDateTime = transmission.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         return TransmissionResponseDTO.GetTransmissionResultDTO.builder()
                 .transmissionId(transmission.getId())
-                .diaryId(transmission.getDiary().getId())
+                .diaryTitle(transmission.getDiary().getTitle())
+                .diaryContent(transmission.getDiary().getContent())
+                .sentAt(parsedLocalDateTime)
                 .build();
     }
 
