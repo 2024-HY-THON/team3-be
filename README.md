@@ -1,8 +1,10 @@
 # HY-THON team3 Backend 리포지토리
 
+![image](https://github.com/user-attachments/assets/50aa2a12-9295-45d3-aad8-356a5f4fda1a)
+
 ## 1. 아이디어 소개
 
-![image](https://github.com/user-attachments/assets/50aa2a12-9295-45d3-aad8-356a5f4fda1a)
+![image](https://github.com/user-attachments/assets/cab786e5-0b55-445e-bc92-aa752661a4f5)
 
 **느린 우체국 주요 기능**
 1. 편지 작성하기🖊️
