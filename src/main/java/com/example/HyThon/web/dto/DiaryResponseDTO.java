@@ -33,6 +33,9 @@ public class DiaryResponseDTO {
     @AllArgsConstructor
     public static class GetDiaryResultDTO {
         Long diaryId;
+        String diaryTitle;
+        String diaryContent;
+        String writtenAt;
     }
 
     @Builder
