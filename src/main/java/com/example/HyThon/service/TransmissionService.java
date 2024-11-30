@@ -10,7 +10,6 @@ import com.example.HyThon.domain.Transmission;
 import com.example.HyThon.domain.enums.EmotionType;
 import com.example.HyThon.domain.enums.SubjectType;
 import com.example.HyThon.repository.DiaryRepository;
-import com.example.HyThon.repository.MemberRepository;
 import com.example.HyThon.repository.TransmissionRepository;
 import com.example.HyThon.web.dto.TransmissionRequestDTO;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -29,13 +29,17 @@ public class TransmissionService {
 
     private final TransmissionRepository transmissionRepository;
     private final DiaryRepository diaryRepository;
-    private final MemberRepository memberRepository;
 
     public Transmission transmitDiary(Member member, TransmissionRequestDTO.TransmitDTO request) {
+
+        Optional<Transmission> findTransmission = transmissionRepository.findByMemberAndDate(member, LocalDate.now());
+        if (findTransmission.isPresent())
+            throw new TransmissionHandler(ErrorStatus.TRANSMISSION_ALREADY_EXIST);
 
         // 내 일기 찾기
         Diary findDiary = diaryRepository.findById(request.getDiaryId())
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
+
         if (!Objects.equals(findDiary.getWriter().getId(), member.getId()))
             throw new DiaryHandler(ErrorStatus.MEMBER_NOT_MATCH);
         SubjectType subjectType = findDiary.getSubjectType();
