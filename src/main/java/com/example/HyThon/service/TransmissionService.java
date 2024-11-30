@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @Service
@@ -28,11 +29,13 @@ public class TransmissionService {
     private final TransmissionRepository transmissionRepository;
     private final DiaryRepository diaryRepository;
 
-    public Transmission transmitDiary(TransmissionRequestDTO.TransmitDTO request) {
+    public Transmission transmitDiary(Member member, TransmissionRequestDTO.TransmitDTO request) {
 
         // 내 일기 찾기
         Diary findDiary = diaryRepository.findById(request.getDiaryId())
                 .orElseThrow(() -> new DiaryHandler(ErrorStatus.DIARY_NOT_FOUND));
+        if (!Objects.equals(findDiary.getWriter().getId(), member.getId()))
+            throw new DiaryHandler(ErrorStatus.MEMBER_NOT_MATCH);
         SubjectType subjectType = findDiary.getSubjectType();
         EmotionType emotionType = findDiary.getEmotionType();
         LocalDate writingDate = findDiary.getCreationDate();
@@ -46,8 +49,8 @@ public class TransmissionService {
         // 일기 리스트에서 랜덤으로 하나 뽑기 (내 일기와는 다른 일기)
         Diary randomDiary = randomDiary(diaryList, findDiary);
 
-        // 수신자의 일기와 내 번호 저장하기
-        Transmission transmission = TransmissionConverter.toTransmission(randomDiary, findDiary.getWriter());
+        // 받은 일기와 내 정보 저장하기
+        Transmission transmission = TransmissionConverter.toTransmission(randomDiary, member);
         return transmissionRepository.save(transmission);
     }
 
