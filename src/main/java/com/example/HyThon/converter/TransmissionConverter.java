@@ -30,12 +30,14 @@ public class TransmissionConverter {
     }
 
     public static TransmissionResponseDTO.GetTransmissionResultDTO toGetTransmissionResultDTO(Transmission transmission) {
-        String parsedLocalDateTime = transmission.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        String sentLocalDateTime = transmission.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        String writingAt = transmission.getDiary().getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         return TransmissionResponseDTO.GetTransmissionResultDTO.builder()
                 .transmissionId(transmission.getId())
                 .diaryTitle(transmission.getDiary().getTitle())
                 .diaryContent(transmission.getDiary().getContent())
-                .sentAt(parsedLocalDateTime)
+                .sentAt(sentLocalDateTime)
+                .writtenAt(writingAt)
                 .build();
     }
 

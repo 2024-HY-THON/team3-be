@@ -29,6 +29,7 @@ public class TransmissionResponseDTO {
         String diaryTitle;
         String diaryContent;
         String sentAt;
+        String writtenAt;
     }
 
 }
