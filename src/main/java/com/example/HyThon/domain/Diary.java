@@ -65,6 +65,5 @@ public class Diary extends BaseEntity {
     public void setEmotionType(EmotionType emotionType) {
         this.emotionType = emotionType;
     }
-    public void setCreationDate(LocalDate creationDate) {this.creationDate =  creationDate;}
 
 }
