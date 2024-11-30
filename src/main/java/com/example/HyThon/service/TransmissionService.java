@@ -10,6 +10,7 @@ import com.example.HyThon.domain.Transmission;
 import com.example.HyThon.domain.enums.EmotionType;
 import com.example.HyThon.domain.enums.SubjectType;
 import com.example.HyThon.repository.DiaryRepository;
+import com.example.HyThon.repository.MemberRepository;
 import com.example.HyThon.repository.TransmissionRepository;
 import com.example.HyThon.web.dto.TransmissionRequestDTO;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class TransmissionService {
 
     private final TransmissionRepository transmissionRepository;
     private final DiaryRepository diaryRepository;
+    private final MemberRepository memberRepository;
 
     public Transmission transmitDiary(TransmissionRequestDTO.TransmitDTO request) {
 
