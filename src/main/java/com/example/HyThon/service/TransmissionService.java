@@ -62,6 +62,7 @@ public class TransmissionService {
 
     public Diary randomDiary(List<Diary> diaryList, Diary findDiary) {
         Random random = new Random();
+        random.setSeed(System.currentTimeMillis());
 
         while (true) {
             Diary diary = diaryList.get(random.nextInt(diaryList.size()));

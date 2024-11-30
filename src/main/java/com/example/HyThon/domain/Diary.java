@@ -33,7 +33,7 @@ public class Diary extends BaseEntity {
     @Builder.Default
     private List<Transmission> tranmissionList = new ArrayList<>();
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 50)
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
