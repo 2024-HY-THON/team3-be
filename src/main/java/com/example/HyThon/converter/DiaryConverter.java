@@ -8,6 +8,7 @@ import com.example.HyThon.web.dto.DiaryResponseDTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DiaryConverter {
 
@@ -57,8 +58,12 @@ public class DiaryConverter {
     }
 
     public static DiaryResponseDTO.GetDiaryResultDTO toGetDiaryResult(Diary diary) {
+        String writingAt = diary.getCreationDate().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         return DiaryResponseDTO.GetDiaryResultDTO.builder()
                 .diaryId(diary.getId())
+                .diaryTitle(diary.getTitle())
+                .diaryContent(diary.getContent())
+                .writtenAt(writingAt)
                 .build();
     }
 
